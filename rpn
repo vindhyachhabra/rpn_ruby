@@ -1,0 +1,28 @@
+class Rpn
+  def Rpn.rpnfunc(v)
+	  op = v.pop
+	  if op=~/^[-+*\/]$/
+	    sec,first = Rpn.rpnfunc(v),Rpn.rpnfunc(v)	
+	    first.send(op,sec)
+	  else
+	    Float(op)	
+	  end
+	end
+end
+class Main
+	def printrpn
+	while t=gets do
+	  begin
+	    v=t.split(" ")	
+	    next if v.empty?
+	    x = Rpn.rpnfunc(v)
+#	    fail if v.size>1;	
+	    puts x
+	  rescue
+	    puts "error"
+	  end
+	end
+	end
+end
+m=Main.new; 
+m.printrpn;
